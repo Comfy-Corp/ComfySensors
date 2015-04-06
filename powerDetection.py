@@ -21,7 +21,7 @@ try:
                 results = x.fetchall()
 		delay = results[0][1] - results[1][1]		
 		watt = 3600 / (187.5 * delay) * 1000;
-		fixedwatt = round(watt,2)			
+		fixedwatt = round(watt,0)			
 		x.execute("INSERT INTO watt(watt) VALUES ('%f')" % (fixedwatt))
 		conn.commit()		
 		time.sleep(2)

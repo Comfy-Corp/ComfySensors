@@ -2,11 +2,14 @@
 <html>
 <head>
 	<meta charset="UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="Style/MasterSheet.css">
+	<link rel="stylesheet" type="text/css" href="css/MasterSheet.css">
 	<link rel="stylesheet" type="text/css" href="css/chartist.min.css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/chartist.js"></script>
 	<script>
+	$( document ).ready(function() {
+    create1h();
+	});
 		var interval;
 		function create1h(){
 			if(interval){
@@ -42,7 +45,7 @@
 					points = {labels,series};
 					console.log(points);
 					var options = {
-						width: $(window).width() - 100,
+						width: 1600,
 						height: 800,
 						ineSmooth: Chartist.Interpolation.simple({
 							divisor: 6
@@ -52,7 +55,7 @@
 					var line = new Chartist.Line('.ct-chart', points, options);
 					interval = setInterval(function(){
 						update1h(line);
-					},5000);
+					},60000);
 				}
 			});
 }
@@ -89,44 +92,6 @@ function getCookie(name) {
 	var value = "; " + document.cookie;
 	var parts = value.split("; " + name + "=");
 	if (parts.length == 2) return parts.pop().split(";").shift();
-}
-
-function makeDiagram() {
-	$('#container-chart').highcharts({
-		chart: {
-			type: 'column',
-			margin: 75,
-			options3d: {
-				enabled: true,
-				alpha: 10,
-				beta: 25,
-				depth: 70
-			}
-		},
-		title: {
-			text: 'Het verbruik bij Joris thuis de afgelopen 7 dagen'
-		},
-		subtitle: {
-			text: 'Het verbruik wordt weergegeven in kWh'
-		},
-		plotOptions: {
-			column: {
-				depth: 25
-			}
-		},
-		xAxis: {
-			categories: ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag']
-		},
-		yAxis: {
-			title: {
-				text: null
-			}
-		},
-		series: [{
-			name: 'kWh verbruikt',
-			data: [500, 300, 340, 390, 350, 400, 550]
-		}]
-	});
 }
 </script> 
 <title>Stroom verbruik</title>

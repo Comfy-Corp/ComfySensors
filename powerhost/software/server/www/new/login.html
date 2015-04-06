@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Simple Login Template | PrepBootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function sendLogin(){
+            var user = $("#user").val();
+            var password = $("#password").val();
+            var test = btoa(user + ':' + password);
+            var auth = 'Basic ' + test;
+            // Request with custom header
+			$.ajax({
+			type: "POST",
+			url: '../api/login',
+			headers: { 'Authorization': auth},
+			success: function(){
+				console.log('test');
+				window.location = "index.html";
+			}
+			});
+			
+        }
+
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        } 
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="col-md-12" style="min-height: 300px;"></div>
+        <!-- Simple Login - START -->
+        <form class="col-md-12">
+            <div class="form-group">
+                <input id="user" type="text" class="form-control input-lg" placeholder="Gebruikersnaam">
+            </div>
+            <div class="form-group">
+                <input id="password" type="password" class="form-control input-lg" placeholder="Wachtwoord">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" type="button" onclick="sendLogin();">Log in</button>
+            </div>
+        </form>
+        <!-- Simple Login - END -->
+
+    </div>
+
+</body>
+</html>

@@ -29,6 +29,22 @@ var info = {
 
 	},
 
+	getTimeSince: function(req, res) {
+		var query = 'SELECT * FROM watt ORDER BY id DESC LIMIT 1';
+		var db = req.app.get('dbConnection');
+        	db.query(query, function (err, rows, fields) {
+                	if(err) throw err;
+                	var last = rows[0]['date'];
+			last = last - 7200;
+			console.log(last);
+			var time = Date.now()-last;
+			console.log(Date.now());
+               		console.log(Math.round(time/1000));
+			res.json(Math.round(time/1000));
+	        });
+
+	},
+
 	// dummy post
 	createInfo: function(req, res) {
 		var message = req.body;
